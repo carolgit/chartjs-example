@@ -1,27 +1,73 @@
-# Chartjs
+# Angular Chartjs Tutorial
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
+baixe via 
 
-## Development server
+```
+npm install chart.js --save
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Importe no componente
 
-## Code scaffolding
+```
+import Chart from 'chart.js';
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Chame a funcao de criar o grafico somente depois de carregar o html
 
-## Build
+```
+ngAfterViewInit
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Crie  grafico normalmente
 
-## Running unit tests
+```
+createChart(){
+    console.log("entra");
+    let ctx = document.getElementById("first");
+    let chart = new Chart(ctx,
+      {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+  }
+ ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Importante no HTML utilizar o canvas do grafico dentro de uma div
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+<div>
+    <canvas id="first" width="400" height="400"></canvas>
+</div>
+```
